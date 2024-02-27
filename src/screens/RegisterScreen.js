@@ -45,7 +45,7 @@ const RegisterScreen = ({ navigation }) => {
       </View>
       <View style={styles.buttonContainer}>
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity style={styles.button1}>
             <Text>Sudah punya akun syariah?</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button2} onPress={handleClick} disabled={loading}>
