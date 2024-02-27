@@ -27,19 +27,20 @@ export default Bayar;
 
 const styles = StyleSheet.create({
 container: {
-    width:'80%',
+    width:'90%',
     borderRadius: 10,
+    paddingVertical: 10,
 },
 list: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingTop: 10,
 },
 image: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
 },
 text: {
-    paddingVertical: 10,
     color: '#852884',
     fontWeight: 'bold'
 }

@@ -2,26 +2,28 @@ import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 const Balance = () => {
     return (
-      <View style={styles.container}>
-        <View style={styles.saldo}>
-            <Text style={styles.text1}>Saldo</Text>
-            <Text style={styles.text2}>Rp 2.000.000</Text>
+        <View style={styles.padding}>
+            <View style={styles.container}>
+                <View style={styles.saldo}>
+                    <Text style={styles.text1}>Saldo</Text>
+                    <Text style={styles.text2}>Rp 2.000.000</Text>
+                </View>
+                <View style={styles.feature}>
+                    <TouchableOpacity style={styles.featureIcon}>
+                        <Image source={require('../assets/QrisIcon.png')}/>
+                        <Text>QRIS</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.featureIcon}>
+                        <Image source={require('../assets/KirimDanaIcon.png')}/>
+                        <Text>Kirim Dana</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.featureIcon}>
+                        <Image source={require('../assets/TopupIcon.png')}/>
+                        <Text>Top up</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
-        <View style={styles.feature}>
-            <TouchableOpacity style={styles.featureIcon}>
-                <Image source={require('../assets/QrisIcon.png')}/>
-                <Text>QRIS</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.featureIcon}>
-                <Image source={require('../assets/KirimDanaIcon.png')}/>
-                <Text>Kirim Dana</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.featureIcon}>
-                <Image source={require('../assets/TopupIcon.png')}/>
-                <Text>Top up</Text>
-            </TouchableOpacity>
-        </View>
-      </View>
     );
 };
 export default Balance;
@@ -29,7 +31,7 @@ export default Balance;
 const styles = StyleSheet.create({
 container: {
     backgroundColor: 'white',
-    width:'80%',
+    width:'90%',
     borderRadius: 10,
 },
 saldo: {
@@ -38,7 +40,9 @@ saldo: {
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f1f1'
+    borderBottomColor: '#f1f1f1',
+    width: '90%',
+    alignSelf: 'center'
 },
 feature: {
     flexDirection: 'row',
@@ -57,5 +61,10 @@ text1: {
 text2: {
     color:'#852884',
     fontWeight: 'bold'
+},
+padding: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 10,
 }
 })

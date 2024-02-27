@@ -20,7 +20,6 @@ export default Balance;
 const styles = StyleSheet.create({
 container: {
     // backgroundColor: 'red',
-    paddingVertical: 20,
     width:'80%',
     borderRadius: 10,
     flexDirection: 'row',

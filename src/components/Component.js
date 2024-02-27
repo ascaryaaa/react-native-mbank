@@ -11,10 +11,6 @@ export default Component;
 const styles = StyleSheet.create({
 container: {
     // backgroundColor: 'red',
-    paddingVertical: 20,
-    width:'80%',
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    paddingVertical: 5,
 }
 })

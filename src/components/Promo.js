@@ -12,10 +12,10 @@ const Component = () => {
           </TouchableOpacity>
         </View>
           <ScrollView style={styles.scrollView}horizontal={true}>
-            <TouchableOpacity style={styles.image}>
+            <TouchableOpacity style={styles.imageContainer}>
               <Image style={styles.image} source={require('../assets/Card.png')}/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.image}>
+            <TouchableOpacity style={styles.imageContainer}>
               <Image style={styles.image} source={require('../assets/Card.png')}/>
             </TouchableOpacity>
           </ScrollView>
@@ -27,16 +27,16 @@ export default Component;
 
 const styles = StyleSheet.create({
 container: {
-    paddingVertical: 10,
     width:'100%',
     borderRadius: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingVertical: 10,
 },
 header:{
   flexDirection: 'row',
   justifyContent: 'space-between',
-  width: '80%',
-  paddingVertical: 10,
+  width: '90%',
+  paddingBottom: 10,
 },
 text1: {
   color: '#852884',
@@ -46,10 +46,14 @@ text2: {
   color: '#39B54A',
 },
 scrollView: {
-  paddingLeft: 25,
+  paddingLeft: 18,
   paddingRight: 50,
 },
 image: {
-  paddingHorizontal: 10,
+  width: 345,
+  height: 184,
+},
+imageContainer: {
+  paddingRight: 10,
 }
 })

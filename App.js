@@ -13,9 +13,26 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Register'>
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomePageScreen} />
+      <Stack.Navigator 
+        initialRouteName='Register'
+      >
+        <Stack.Screen name="Register" 
+          component={RegisterScreen}  
+          options={{ 
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#39B54A',
+              shadowOpacity: 0,
+              elevation: 0,
+            }
+          }}  
+        />
+        <Stack.Screen name="Home" 
+          component={HomePageScreen} 
+          options={{
+            headerShown: false
+          }}  
+        />
         <Stack.Screen name="History" component={HistoryScreen} />
         <Stack.Screen name="Inbox" component={InboxScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />

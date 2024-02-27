@@ -32,25 +32,27 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
-        <Text style={styles.text1}>Nomor Telpon</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setNumber}
-          value={number}
-          placeholder="Phone Number"
-          keyboardType="numeric"
-        />
-        {error ? <Text style={styles.error}>{error}</Text> : null}
-      </View>
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.button1}>
-            <Text>Sudah punya akun syariah?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button2} onPress={handleClick} disabled={loading}>
-            {loading ? <ActivityIndicator size="small" color="#FFFFFF" /> : <Text style={styles.button2Text}>Login</Text>}
-          </TouchableOpacity>
+      <View style={styles.content}>
+        <View style={styles.form}>
+          <Text style={styles.text1}>Nomor Telpon</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setNumber}
+            value={number}
+            placeholder="Phone Number"
+            keyboardType="numeric"
+          />
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.buttonView}>
+            <TouchableOpacity>
+              <Text>Sudah punya akun syariah?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleClick} disabled={loading}>
+              {loading ? <ActivityIndicator size="small" color="#FFFFFF" /> : <Text style={styles.button2Text}>Login</Text>}
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -62,7 +64,14 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor:'#39B54A'
+  },
+  content: {
+    flex:1,
+    marginTop:10,
+    borderTopRightRadius:30,
+    borderTopLeftRadius:30,
+    backgroundColor: 'white',
   },
   buttonContainer: {
     flexDirection: "row",
@@ -77,13 +86,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     padding: 10,
     paddingBottom: 30,
-  },
-  button2: {
-    color: 'purple'
-  },
-  button1: {
-    backgroundColor: 'white',
-    justifyContent: "center"
   },
   input: {
     height: 40,
@@ -100,5 +102,9 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     marginTop: 5,
+  },
+  button2Text: {
+    color: '#852884',
+    fontWeight: 'bold'
   }
 });

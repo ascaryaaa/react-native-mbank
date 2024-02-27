@@ -10,7 +10,9 @@ const HomePageScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image style={styles.backgroundImage} source={require('../assets/background.png')} />
-      <Name/>
+      <View style={styles.name}>  
+        <Name/>
+      </View>
       <Balance/>
       <Bayar/>
       <Promo/>
@@ -33,14 +35,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    // backgroundColor: 'red',
   },
   buttonView: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     justifyContent: 'space-evenly',
-    // backgroundColor: 'green',
     padding: 10,
     paddingBottom: 30,
   },
@@ -54,5 +54,9 @@ const styles = StyleSheet.create({
   backgroundImage: {
     position: "absolute",
     width: "100%"
+  },
+  name: {
+    paddingTop:40,
+    paddingVertical: 10,
   }
 });
