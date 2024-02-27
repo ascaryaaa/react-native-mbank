@@ -14,9 +14,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName='Register'
+        initialRouteName='Daftar Baru'
       >
-        <Stack.Screen name="Register" 
+        <Stack.Screen name="Daftar Baru" 
           component={RegisterScreen}  
           options={{ 
             headerTintColor: 'white',

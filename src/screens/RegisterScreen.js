@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator, Image } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => {
   const [number, setNumber] = useState('');
@@ -33,6 +33,11 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
+        <Text style={styles.textAssalamualaikum}>Assalamualaikum</Text>
+        <Text>selamat datang di Syariah</Text>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image}source={require('../assets/Illustration.png')}/>
+        </View>
         <View style={styles.form}>
           <Text style={styles.text1}>Nomor Telpon</Text>
           <TextInput
@@ -106,5 +111,15 @@ const styles = StyleSheet.create({
   button2Text: {
     color: '#852884',
     fontWeight: 'bold'
+  },
+  image: {
+    width:350,
+    height:232,
+  },
+  imageContainer: {
+    alignItems: 'center'
+  },
+  textAssalamualaikum: {
+    
   }
 });
