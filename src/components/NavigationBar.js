@@ -20,7 +20,7 @@ const NavigationBar = ({ navigation }) => {
             <View style={styles.icon}>
               <Image source={require('../assets/inbox.png')}/>
             </View>
-            <Text>inbox</Text>
+            <Text>Inbox</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
             <View style={styles.icon}>

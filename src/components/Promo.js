@@ -47,6 +47,7 @@ text2: {
 },
 scrollView: {
   paddingLeft: 25,
+  paddingRight: 50,
 },
 image: {
   paddingHorizontal: 10,
