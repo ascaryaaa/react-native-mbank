@@ -14,7 +14,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName='Daftar Baru'
+        initialRouteName='Home'
       >
         <Stack.Screen name="Daftar Baru" 
           component={RegisterScreen}  
