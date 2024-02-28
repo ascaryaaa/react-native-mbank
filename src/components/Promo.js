@@ -10,7 +10,6 @@ const Component = () => {
         axios.get('https://private-anon-91cc841bc2-itodpbni.apiary-mock.com/menu/promo')
           .then(function (response) {
             console.log("Response Get Account", response.data);
-            // const selectedItem = response.data.list.find(item => item.id === 1);
             setPromo(response.data);
           })
           .catch(function (error) {

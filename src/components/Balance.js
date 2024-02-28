@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
 import axios from 'axios';
 
 export default function Balance() {
     const [user, setUser] = useState('');
+    const [menuTransfer, setMenuTransfer] = useState('');
 
     useEffect(() => {
       getUser();
+      getMenuTransfer();
     }, []);
   
     const getUser = () => {
@@ -19,6 +21,16 @@ export default function Balance() {
           console.error("Error", error);
         });
     };
+    const getMenuTransfer = () => {
+        axios.get('https://private-anon-91cc841bc2-itodpbni.apiary-mock.com/menu/transfer')
+          .then(function (response) {
+            console.log("Response Get Menu Transfer", response.data);
+            setMenuTransfer(response.data);
+          })
+          .catch(function (error) {
+            console.error("Error", error);
+          });
+      };
     return (
         <View style={styles.padding}>
             <View style={styles.container}>
@@ -26,7 +38,17 @@ export default function Balance() {
                     <Text style={styles.text1}>Saldo</Text>
                     <Text style={styles.text2}>{user && `Rp.${user.balance.toLocaleString()}`}</Text>
                 </View>
-                <View style={styles.feature}>
+                <FlatList
+                  contentContainerStyle={styles.feature}
+                  data={menuTransfer.menu}
+                  renderItem={ item  => 
+                      <TouchableOpacity style={styles.featureIcon}>
+                          <Image style={styles.image} source={{uri: item.item.image}}/>
+                      </TouchableOpacity>
+                  }
+                  keyExtractor={(item) => item.id.toString()}
+                />
+                {/* <View style={styles.feature}>
                     <TouchableOpacity style={styles.featureIcon}>
                         <Image source={require('../assets/QrisIcon.png')}/>
                         <Text>QRIS</Text>
@@ -39,7 +61,7 @@ export default function Balance() {
                         <Image source={require('../assets/TopupIcon.png')}/>
                         <Text>Top up</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
         </View>
     );
@@ -78,6 +100,10 @@ text1: {
 text2: {
     color:'#852884',
     fontWeight: 'bold'
+},
+image: {
+    width: 60,
+    height: 60,
 },
 padding: {
     width: '100%',
