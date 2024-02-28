@@ -7,9 +7,11 @@ const RegisterScreen = ({ navigation }) => {
   const [number, setNumber] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (isChecked) => {
     console.log('Checkbox is checked:', isChecked);
+    setIsChecked(isChecked);
   };
 
   const validation = (phone) => {
@@ -26,6 +28,12 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleClick = async () => {
     setLoading(true);
+    if (!isChecked) {
+      setError('Please agree to the terms');
+      setLoading(false);
+      return;
+    }
+
     try {
       await validation(number);
       navigation.navigate('Home');
