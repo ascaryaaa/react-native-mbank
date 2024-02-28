@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, TextInput, ActivityIndicator, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import Checkbox from '../components/Checkbox';
 
 const RegisterScreen = ({ navigation }) => {
   const [number, setNumber] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const handleCheckboxChange = (isChecked) => {
+    console.log('Checkbox is checked:', isChecked);
+  };
 
   const validation = (phone) => {
     return new Promise((resolve, reject) => {
@@ -33,13 +39,15 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
+        <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.textAssalamualaikum}>Assalamualaikum</Text>
         <Text>selamat datang di Syariah</Text>
         <View style={styles.imageContainer}>
           <Image style={styles.image}source={require('../assets/Illustration.png')}/>
         </View>
+        <Text>Mohon masukkan nomor telepon Anda, kami akan mengirimkan kode OTP ke nomor Anda melalui WhatsApp/SMS</Text>
         <View style={styles.form}>
-          <Text style={styles.text1}>Nomor Telpon</Text>
+          <Text style={styles.textNomor}>Nomor Telpon</Text>
           <TextInput
             style={styles.input}
             onChangeText={setNumber}
@@ -47,7 +55,11 @@ const RegisterScreen = ({ navigation }) => {
             placeholder="Phone Number"
             keyboardType="numeric"
           />
+          <Text style={styles.contoh}>Contoh: 081234567890</Text>
           {error ? <Text style={styles.error}>{error}</Text> : null}
+        </View>
+        <View>
+          <Checkbox label="Saya telah menyetujui data pribadi saya dikelola oleh PT Solusi Pasti Indonesia dan partner yang bekerja sama dengan PT Solusi Pasti Indonesia untuk tujuan yang telah disebutkan di dalam Kebijakan Privasi Syariah" onChange={handleCheckboxChange} />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.buttonView}>
@@ -59,6 +71,7 @@ const RegisterScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -74,9 +87,10 @@ const styles = StyleSheet.create({
   content: {
     flex:1,
     marginTop:10,
-    borderTopRightRadius:30,
-    borderTopLeftRadius:30,
+    borderTopRightRadius:25,
+    borderTopLeftRadius:25,
     backgroundColor: 'white',
+    paddingHorizontal: 20,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -96,13 +110,16 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 8,
+    borderColor: '#a6a6a6',
+    backgroundColor: '#f7f7f7'
   },
   form: {
-    paddingTop: 100,
-    margin: 12,
+    paddingVertical: 20,
   },
-  text1: {
+  textNomor: {
     paddingVertical: 5,
+    fontWeight: 'bold',
   },
   error: {
     color: 'red',
@@ -117,9 +134,20 @@ const styles = StyleSheet.create({
     height:232,
   },
   imageContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingVertical: 20,
   },
   textAssalamualaikum: {
-    
+    color: '#39B54A',
+    fontSize: 26,
+    fontWeight: 'bold',
+    paddingTop: 20,
+  },
+  contoh: {
+    paddingVertical: 5,
+    fontSize: 12,
+  },
+  menyetujui: {
+    fontSize:12,
   }
 });
