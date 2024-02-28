@@ -1,8 +1,26 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import axios from 'axios';
+
 const Component = () => {
+    const [promo, setPromo] = useState('');
+
+    const getPromo = () => {
+        axios.get('https://private-anon-91cc841bc2-itodpbni.apiary-mock.com/menu/promo')
+          .then(function (response) {
+            console.log("Response Get Account", response.data);
+            // const selectedItem = response.data.list.find(item => item.id === 1);
+            setPromo(response.data);
+          })
+          .catch(function (error) {
+            console.error("Error", error);
+          });
+    };
+
+    useEffect(() => {
+        getPromo();
+    }, []);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -11,15 +29,19 @@ const Component = () => {
             <Text style={styles.text2}>Lihat Semua</Text>
           </TouchableOpacity>
         </View>
-          <ScrollView style={styles.scrollView}horizontal={true}>
-            <TouchableOpacity style={styles.imageContainer}>
-              <Image style={styles.image} source={require('../assets/Card.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.imageContainer}>
-              <Image style={styles.image} source={require('../assets/Card.png')}/>
-            </TouchableOpacity>
+          <ScrollView>
+            <FlatList
+                  horizontal={true}
+                  contentContainerStyle={styles.scrollView}
+                  data={promo.promos}
+                  renderItem={ item  => 
+                      <TouchableOpacity style={styles.imageContainer}>
+                          <Image style={styles.image} source={{uri: item.item.image}}/>
+                      </TouchableOpacity>
+                  }
+                  keyExtractor={(item) => item.id.toString()}
+            />
           </ScrollView>
-
       </View>
     );
 };
@@ -47,7 +69,7 @@ text2: {
 },
 scrollView: {
   paddingLeft: 18,
-  paddingRight: 50,
+  paddingRight: 10,
 },
 image: {
   width: 345,
