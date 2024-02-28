@@ -1,25 +1,40 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
+import axios from 'axios';
+
 const Bayar = () => {
+    const [menuPPOB, setMenuPPOB] = useState('');
+
+    const getMenuPPOB = () => {
+        axios.get('https://private-anon-91cc841bc2-itodpbni.apiary-mock.com/menu/ppob')
+          .then(function (response) {
+            console.log("Response Get Account", response.data);
+            // const selectedItem = response.data.list.find(item => item.id === 1);
+            setMenuPPOB(response.data);
+          })
+          .catch(function (error) {
+            console.error("Error", error);
+          });
+    };
+
+    useEffect(() => {
+        getMenuPPOB();
+      }, []);
     return (
       <View style={styles.container}>
         <View>
             <Text style={styles.text}>List Pembayaran</Text>
         </View>
-        <View style={styles.list}>
-            <TouchableOpacity>
-                <Image style={styles.image} source={require('../assets/Telco.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image style={styles.image} source={require('../assets/Pln.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image style={styles.image} source={require('../assets/Pdam.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image style={styles.image} source={require('../assets/School.png')}/>
-            </TouchableOpacity>
-        </View>
+            <FlatList
+                contentContainerStyle={styles.list}
+                data={menuPPOB.list}
+                renderItem={ item  => 
+                    <TouchableOpacity>
+                        <Image style={styles.image} source={{uri: item.item.image}}/>
+                    </TouchableOpacity>
+                }
+                keyExtractor={(item) => item.id.toString()}
+            />
       </View>
     );
 };

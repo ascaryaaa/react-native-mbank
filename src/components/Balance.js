@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
-const Balance = () => {
+import axios from 'axios';
+
+export default function Balance() {
+    const [user, setUser] = useState('');
+
+    useEffect(() => {
+      getUser();
+    }, []);
+  
+    const getUser = () => {
+      axios.get('https://private-anon-91cc841bc2-itodpbni.apiary-mock.com/account')
+        .then(function (response) {
+          console.log("Response Get Account", response.data);
+          setUser(response.data.user);
+        })
+        .catch(function (error) {
+          console.error("Error", error);
+        });
+    };
     return (
         <View style={styles.padding}>
             <View style={styles.container}>
                 <View style={styles.saldo}>
                     <Text style={styles.text1}>Saldo</Text>
-                    <Text style={styles.text2}>Rp 2.000.000</Text>
+                    <Text style={styles.text2}>{user && `Rp.${user.balance.toLocaleString()}`}</Text>
                 </View>
                 <View style={styles.feature}>
                     <TouchableOpacity style={styles.featureIcon}>
@@ -25,8 +43,7 @@ const Balance = () => {
             </View>
         </View>
     );
-};
-export default Balance;
+}
 
 const styles = StyleSheet.create({
 container: {
