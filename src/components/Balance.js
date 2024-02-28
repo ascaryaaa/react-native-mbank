@@ -44,24 +44,11 @@ export default function Balance() {
                   renderItem={ item  => 
                       <TouchableOpacity style={styles.featureIcon}>
                           <Image style={styles.image} source={{uri: item.item.image}}/>
+                          <Text>{item.item.title}</Text>
                       </TouchableOpacity>
                   }
                   keyExtractor={(item) => item.id.toString()}
                 />
-                {/* <View style={styles.feature}>
-                    <TouchableOpacity style={styles.featureIcon}>
-                        <Image source={require('../assets/QrisIcon.png')}/>
-                        <Text>QRIS</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.featureIcon}>
-                        <Image source={require('../assets/KirimDanaIcon.png')}/>
-                        <Text>Kirim Dana</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.featureIcon}>
-                        <Image source={require('../assets/TopupIcon.png')}/>
-                        <Text>Top up</Text>
-                    </TouchableOpacity>
-                </View> */}
             </View>
         </View>
     );
