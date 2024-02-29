@@ -2,58 +2,59 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { FIREBASE_APP, FIREBASE_AUTH } from "../../helpers/firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Register = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   const auth=FIREBASE_AUTH;
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-    useEffect(() => {
-        AsyncStorage
-        .getItem('token')
-        .then(token => {
-            if (token !== null) {
-                navigation.navigate('Home')
-            }
-        })
-    }, [])
-
-    const handleRegister = async() => {
-      try {
-          const response = await createUserWithEmailAndPassword(auth, email, password)
-          console.log(response)
-          signInWithEmailAndPassword(auth, email, password) //1. sign in user
-          .then(response => response.user.getIdToken()) //2. call user id token
-          .then(token => AsyncStorage.setItem('token', token) ) //3. store token
-          .then(() => {
-              Alert.alert('Login Success!', 'Welcome!', [
-                  {
-                    text: 'Ok',
-                    onPress: () => navigation.navigate('Home')
-                  }
-              ])
-          }) 
-      } catch(error) {
-          console.log(error)
-          Alert.alert('Error on Register', error.message)
+  
+  useEffect(() => {
+    AsyncStorage
+    .getItem('token')
+    .then(token => {
+      if (token !== null) {
+        navigation.navigate('Home')
       }
+    })
+  }, [])
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password) //1. sign in user
+    .then(response => response.user.getIdToken()) //2. call user id token
+    .then(token => AsyncStorage.setItem('token', token) ) //3. store token
+    .then(() => {
+      Alert.alert('Login Success!', 'Welcome!', [
+        {
+          text: 'Ok',
+          onPress: () => navigation.navigate('Home')
+        }
+      ])
+    })
+    .catch(error => {
+      console.log(error.message);
+      if (error.code === 'auth/invalid-email') {
+        Alert.alert('Invalid Email');
+      } else {
+        Alert.alert('Error', error.message);
+      }
+    });
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={styles.textAssalamualaikum}>Assalamualaikum</Text>
-            <Text>selamat datang di Syariah</Text>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image}source={require('../assets/Illustration.png')}/>
-          </View>
-          <Text>Mohon masukkan email anda dan password untuk membuat akun</Text>
-          <View style={styles.form}>
-            <Text style={styles.textNomor}>Register</Text>
-            <View style={styles.inputContainer}>
+        <Text style={styles.textAssalamualaikum}>Assalamualaikum</Text>
+        <Text>selamat datang di Syariah</Text>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image}source={require('../assets/Illustration.png')}/>
+        </View>
+        <Text>Mohon masukkan email dan password anda</Text>
+        <View style={styles.form}>
+          <Text style={styles.textNomor}>Login</Text>
+          <View style={styles.inputContainer}>
               <TextInput 
                 style={styles.input} 
                 placeholder="email"
@@ -69,24 +70,24 @@ const Register = ({ navigation }) => {
                 onChangeText={setPassword}    
               />
             </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.buttonView}>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+              <Text>Belum punya akun?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleLogin}>
+              <Text style={styles.button2Text}>Login</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.buttonContainer}>
-            <View style={styles.buttonView}>
-              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text>Sudah punya akun syariah?</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleRegister}>
-                <Text style={styles.button2Text}>Register</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+        </View>
         </ScrollView>
       </View>
     </View>
   );
 };
 
-export default Register;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -121,7 +122,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     borderColor: '#a6a6a6',
-    backgroundColor: '#f7f7f7'
+    backgroundColor: '#f7f7f7',
+    paddingVertical: 10,
   },
   inputContainer: {
     paddingVertical: 5,

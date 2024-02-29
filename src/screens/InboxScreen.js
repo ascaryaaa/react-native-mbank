@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 const InboxScreen = () => {
     return (
       <View style={styles.container}>

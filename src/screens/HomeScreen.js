@@ -5,7 +5,6 @@ import Name from '../components/Name';
 import Bayar from '../components/Bayar';
 import Promo from '../components/Promo';
 import NavigationBar from '../components/NavigationBar';
-import axios from "axios";
 
 const HomePageScreen = ({navigation}) => {
   return (
